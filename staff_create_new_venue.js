@@ -48,9 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
     newZoneCapacityInput.name = "Capacity[]";
     newZoneCapacityInput.placeholder = "Capacity(Seats)";
 
-    var seatsLabel = document.createElement("span");
-    seatsLabel.textContent = "Seats";
-
     var seatsContainer = document.createElement("div");
     seatsContainer.className = "seats-container";
 
@@ -71,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     newZoneSlot.appendChild(newZoneInput);
     newZoneSlot.appendChild(newZoneSelect);
     newZoneSlot.appendChild(newZoneCapacityInput);
-    newZoneSlot.appendChild(seatsLabel);
     newZoneSlot.appendChild(seatsContainer);
     newZoneSlot.appendChild(addSeatButton);
     newZoneSlot.appendChild(deleteZoneButton);
