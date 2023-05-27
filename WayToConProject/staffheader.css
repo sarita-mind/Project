@@ -8,14 +8,14 @@ body {
     margin: 0 auto;
 }
 .header {
-    background: #6F4187;
+    background:  #F06647;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
     border-bottom-left-radius: 33px;
     border-bottom-right-radius: 33px;
     height: 150px;
     left: 0px;
     margin-top: -10px;
-} 
+}
 .header-con {
     display: flex;
     justify-content: space-between;
@@ -40,12 +40,16 @@ body {
 .line-container  img{
     width: 80%;
 }
+
+.stafflogo-container  {
+    padding-left: 2rem;
+}
 .menu {
     display: flex;
     list-style-type: none;
 }
 .menu li {
-    padding-left: 3rem;
+    padding-left: 2rem;
 }
 .menu li a {
     text-decoration: none;
@@ -53,36 +57,6 @@ body {
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #695972;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-.dropdown-content a:hover {background-color: #685a6e;}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    background: #c6a2da;
-    color: #fff;
-}
-
-.user-con h6{
-    margin: 0 0 0 20rem;
-    color:#ffff;
-    text-align: left;
-    font-weight: 400;
-    font-size: 20px;
 }
 
 
@@ -118,11 +92,11 @@ body {
 
 
 .login-btn {
-    margin-left: 300px;
+    margin-left: 120px;
 }
 
 .login-btn a {
-    background: #9565AE;
+    background: #F68B63;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     display: inline-block;

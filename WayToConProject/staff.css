@@ -1,0 +1,15 @@
+html,
+body {
+    font-family: 'Poppins', sans-serif;    
+}
+
+.welcome{
+    margin: auto;
+    width: 640px; 
+    padding: 50px;
+    color: #F68B63;
+}
+.welcome h1 {
+    text-align: center;
+    font-size: 80px;
+}

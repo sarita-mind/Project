@@ -1,0 +1,81 @@
+html,
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.card{
+    border-radius: 8px;
+}
+
+.card img{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 25px;
+}
+
+.seat-type li{
+    display: inline-block;
+}
+
+.seat-type li .ico {
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.seat-type li .ico,
+.seat-type li .txt {
+    display: inline-block;
+    vertical-align: middle;
+}
+.seat-map-stage {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    background-color: black;
+}
+.seat-map-stage .txt{
+    position: relative;
+    z-index: 2;
+    display: block;
+    letter-spacing: 5px;
+    color: #fff;
+}
+
+.seat-table {
+    background-color: black;
+    color: #fff;
+}
+
+#tableseats.seatnotavail {
+    position: static;
+    min-height: 28px;
+    min-width: 28px;
+}
+
+#tableseats.seatnotavail {
+    background-color: #FF0000;
+    height: 100%;
+    width: 100%;
+}
+
+.H12345 td {
+    background-color: #ADFF00 ;
+}
+
+.H12345 .headrow,
+.H12345 .skiprow {
+    background-color: transparent ;
+}
+
+#tableseats td{
+    width: 28px;
+    height : 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    backface-visibility: hidden;
+}

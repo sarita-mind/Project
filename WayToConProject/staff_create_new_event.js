@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         newDateSlot.className = 'show-date-slot';
 
         var slotLabel = document.createElement('p');
-        slotLabel.textContent = "Slot " + (++showDateCounter);
+        slotLabel.textContent = "Slot " + (showDateCounter);
 
         var newDateInput = document.createElement('input');
         newDateInput.type = 'datetime-local';
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteButton.addEventListener('click', function() {
             newDateSlot.remove();
             --showDateCounter;
+            updateLabels('show-date-slot');
             manageDeleteButtons('show-date-slot');
         });
 
@@ -32,17 +33,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var addDateButton = document.getElementById('add_date_new_slot');
         showDatesContainer.insertBefore(newDateSlot, addDateButton);
+        showDateCounter++;
+        updateLabels('show-date-slot');
     }
 
     // Manage Zones
     function createNewZoneSlot() {
+        console.log('creating new zone slot');
         var zonesContainer = document.getElementById('zones-container');
 
         var newZoneSlot = document.createElement('div');
         newZoneSlot.className = 'zone-slot';
 
         var slotLabel = document.createElement('p');
-        slotLabel.textContent = "Zone " + (++zoneCounter);
+        slotLabel.textContent = "Zone " + (zoneCounter);
 
         var newZoneInput = document.createElement('input');
         newZoneInput.type = 'text';
@@ -55,23 +59,46 @@ document.addEventListener("DOMContentLoaded", function() {
         newZonePriceInput.min = '0';
         newZonePriceInput.placeholder = 'Zone Price';
 
+        var zoneTypeSelect = document.createElement('select');
+        zoneTypeSelect.name = 'zone_type[]';
+        var option1 = document.createElement('option');
+        option1.value = 'standing';
+        option1.textContent = 'Standing';
+        zoneTypeSelect.appendChild(option1);
+        var option2 = document.createElement('option');
+        option2.value = 'seating';
+        option2.textContent = 'Seating';
+        zoneTypeSelect.appendChild(option2);
+
+        var newZoneSeatsInput = document.createElement('input');
+        newZoneSeatsInput.type = 'number';
+        newZoneSeatsInput.name = 'zone_seats[]';
+        newZoneSeatsInput.min = '0';
+        newZoneSeatsInput.placeholder = 'Number of Seats';
+
         var deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete this zone';
         deleteButton.type = 'button';
         deleteButton.addEventListener('click', function() {
             newZoneSlot.remove();
             --zoneCounter;
+            updateLabels('zone-slot');
             manageDeleteButtons('zone-slot');
         });
 
         newZoneSlot.appendChild(slotLabel);
         newZoneSlot.appendChild(newZoneInput);
         newZoneSlot.appendChild(newZonePriceInput);
+        newZoneSlot.appendChild(zoneTypeSelect);
+        newZoneSlot.appendChild(newZoneSeatsInput);
         newZoneSlot.appendChild(deleteButton);
 
         var addZoneButton = document.getElementById('add_zone_new_slot');
         zonesContainer.insertBefore(newZoneSlot, addZoneButton);
+        zoneCounter++;
+        updateLabels('zone-slot');
     }
+
 
     // Manage Delete Buttons
     function manageDeleteButtons(slotClassName) {
@@ -79,6 +106,20 @@ document.addEventListener("DOMContentLoaded", function() {
         for(let i=0; i < slots.length; i++) {
             var deleteButton = slots[i].querySelector('button');
             deleteButton.disabled = slots.length === 1;
+        }
+    }
+
+    // Update labels
+    function updateLabels(slotClassName) {
+        console.log('updating labels for', slotClassName);
+        var slots = document.getElementsByClassName(slotClassName);
+        for(let i=0; i < slots.length; i++) {
+            var label = slots[i].querySelector('p');
+            if(slotClassName === 'show-date-slot') {
+                label.textContent = "Slot " + (i+1);
+            } else {
+                label.textContent = "Zone " + (i+1);
+            }
         }
     }
 

@@ -11,6 +11,9 @@
     <title>WayToCon</title>
     <link rel="icon" type="image/x-icon" href="image/template.png" />
     <link rel="stylesheet" href="userregister.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -42,6 +45,7 @@
                     placeholder="First Name"
                     class="form-control"
                     type="text"
+                    maxlength="20"
                     required
                   />
                 </div>
@@ -60,6 +64,7 @@
                     placeholder="Last Name"
                     class="form-control"
                     type="text"
+                    maxlength="20"
                     required
                   />
                 </div>
@@ -116,6 +121,7 @@
                     placeholder="089-9XX-XXXX"
                     class="form-control"
                     type="text"
+                    maxlength="10"
                     required
                   />
                 </div>
@@ -131,9 +137,11 @@
                   ></span>
                   <input
                     name="id_card"
-                    placeholder="ID Card(13 character)"
+                    placeholder="ID Card (13 characters)"
                     class="form-control"
                     type="text"
+                    minlength="13"
+                    maxlength="13"
                     required
                   />
                 </div>
@@ -152,6 +160,7 @@
                     placeholder="E-Mail Address"
                     class="form-control"
                     type="text"
+                    maxlength="30"
                     required
                   />
                 </div>
@@ -184,9 +193,11 @@
                   ></span>
                   <input
                     name="password"
-                    placeholder="Enter password"
+                    placeholder="Enter password (5 - 15 characters)"
                     class="form-control"
                     type="password"
+                    minlength="5"
+                    maxlength="15"
                     required
                   />
                 </div>
@@ -231,7 +242,7 @@
                         <!-- <div class="col-md-4 inputGroupContainer"> -->
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <button type="submit" class="form-control create-acc">
+                                <button type="submit" name="reg_user" class="form-control create-acc">
                                     <span> Create Account </span>
                                 </button>
                             </div>

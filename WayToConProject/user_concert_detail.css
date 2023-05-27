@@ -10,17 +10,28 @@ body {
 .card img{
     max-height: 100%;
     max-width: 100%;
-    border-radius: 8px 8px 0px 0;
+    border-radius: 25px;
 }
 
-.card-title {
-    text-decoration: none;
-    color: #9565AE;
+.card-body {
+    border: solid 2px;
+    border-radius: 15px;
+    padding: 15px;
 }
 
-.card-text p{
-    font-size: 14px;
-    color: #0000;
+.detail-body {
+    border: solid 2px;
+    margin: auto;
+    height: 435px;
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.info-card {
+    border: solid 2px;
+    margin: auto;
+    padding: 0 0 0 50px;
+    border-radius: 25px;
 }
 
 .card-button {
@@ -40,5 +51,5 @@ body {
     text-decoration: none;
     background-color: #74BAB9;
     color: #fff;
-
 }
+
