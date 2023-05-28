@@ -23,9 +23,10 @@ $result = mysqli_query($con, $venuequery);
     <link rel="icon" type="image/x-icon" href="image/template.png" />
     <link rel="stylesheet" href="all_venue.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com/" >
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
 </head>
 
 <body>
@@ -105,6 +106,7 @@ $result = mysqli_query($con, $venuequery);
         </table>
 
         <a class='add_venue mt=1' href="staff_create_new_venue.php">Add New Venue</a>
+        <a class='add_venue mt=1' href="newseat.php">Add New Seat</a>
     </div>
 </body>
 

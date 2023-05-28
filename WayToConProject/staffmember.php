@@ -18,22 +18,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com/" >
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
 </head>
 <body>
     <?php include_once('staffheader.php'); ?>
     <div class="container">
+    
         <div class="h5 text-center mb-5 mt-5"> All Staff Member </div>
-        <table class="table table-striped">
-            <tr class="table-secondary">
-                <th>Staff ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Position</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
+        <div class="card mb-4">
+        <table id="datatablesSimple" class="table table-striped">
+            <thead>
+                <tr class="table-secondary">
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Position</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tfoot>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Position</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+            </tfoot>
 
         <?php while($row = mysqli_fetch_array($result)) { ?>
             <tr>
@@ -48,9 +66,10 @@
             </tr>
         <?php } ?>
         </table>
-
-        <a class ='add_staff mt=1' href="addstaff.php">Add New Staff</a>   
-    </div>
+        </div>
+        <a class ='add_staff mt-1 mb-3' href="addstaff.php">Add New Staff</a> <br><br> 
+   
+        </div>
 </body>
 </html>
 

@@ -44,14 +44,14 @@
                             <a href="#">Client</a>
                         </li>
                         <li class="menu-link">
-                            <a href="#">Venue</a>
+                            <a href="all_venue.php">Venue</a>
                         </li>
                         <li class="menu-link">
                             <a href="#">Dashboard</a>
                         </li>
                     </ul>
                     <div class="login-btn">
-                        <a href="index.php?logout='1'" class="login-btn">Log Out</a>
+                        <a href="staff.php?logout='1'" class="login-btn">Log Out</a>
                     </div>
                 </div>
             </div>

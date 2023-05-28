@@ -113,8 +113,8 @@ $result = mysqli_query($con, $eventquery);
                        <td rowspan='{$rowspanCount}'>{$row['SeatingMap']}</td>
                        <td rowspan='{$rowspanCount}'>{$row['LimitTicket']}</td>
                        <td rowspan='{$rowspanCount}'>{$row['EventDetails']}</td>
-                       <td rowspan='{$rowspanCount}'><a class='edit_staff mt=1' href='updatestaff.php?id={$row['ShowID']}'>Edit</a></td>
-                       <td rowspan='{$rowspanCount}'><a class='delete_staff mt=1' href='deletestaff.php?id={$row['ShowID']}' onclick='confirmdel(this.href);return false;'>Delete</a></td>
+                       <td rowspan='{$rowspanCount}'><a class='edit_event mt=1' href='updateevent.php?id={$row['ShowID']}'>Edit</a></td>
+                       <td rowspan='{$rowspanCount}'><a class='delete_event mt=1' href='deleteevent.php?id={$row['ShowID']}' onclick='confirmdel(this.href);return false;'>Delete</a></td>
                    </tr>";
                 } else {
                     echo "<tr>

@@ -28,7 +28,11 @@
                     srcset="https://cdn-icons-png.flaticon.com/128/57/57055.png 4x">
 
                 <div class="box">
+
+
                     <input type="text" id="location_name" name="location_name" placeholder="Venue name" require />
+
+
                     <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png"
                         data-src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" alt="Edit " title="Edit "
                         width="25" height="25" class="lzy lazyload--done"
@@ -36,12 +40,20 @@
                         style="position: absolute; top: 9.7%; left: 93%; transform: translate(-50%, -50%); filter: invert(70%)">
                     <p>Capacity</p>
                     <div class="text-small-venue">
+
+
                         <input type="text" id="location_capacity" name="location_capacity" placeholder="Capacity"
                             require />
+
+
                     </div>
                     <span class="text-behind">Seats</span>
                     <p>Address</p>
+
+
                     <textarea id="location_address" name="location_address" rows="10" cols="103" require></textarea>
+
+
                     <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png"
                         data-src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" alt="Edit " title="Edit "
                         width="25" height="25" class="lzy lazyload--done"
@@ -68,7 +80,7 @@
 
 
             <div class='down'>
-                <input type="submit" value="Create New Venue" class='create_new_venue' name="create_new_venue" />
+                <input type="submit" value="Create New Venue" class='create_new_venue mt-4' name="create_new_venue" />
                 <div class='cancel'>
                     <a class="cancel_staff" href="all_venue.php">Cancel</a>
                 </div>

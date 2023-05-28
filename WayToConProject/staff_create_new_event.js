@@ -73,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var newZoneSeatsInput = document.createElement('input');
         newZoneSeatsInput.type = 'number';
         newZoneSeatsInput.name = 'zone_seats[]';
-        newZoneSeatsInput.min = '0';
-        newZoneSeatsInput.placeholder = 'Number of Seats';
+        newZoneSeatsInput.min = '1';
+        newZoneSeatsInput.placeholder = 'Number of Seats (1-99999)';
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete this zone';

@@ -26,7 +26,7 @@
 }
 
 
-.edit_staff {
+.edit_event {
     background-color:  #f7b72c;
     color: white;
     width: 250 px;
@@ -41,12 +41,12 @@
     text-decoration: none;
 }
 
-.edit_staff:hover {
+.edit_event:hover {
     text-decoration: none;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.delete_staff {
+.delete_event {
     background-color: #e0462f;
     color: white;
     width: 250 px;
@@ -61,12 +61,12 @@
     text-decoration: none;
 }
 
-.delete_staff:hover {
+.delete_event:hover {
     text-decoration: none;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.cancel_staff{
+.cancel_event{
     background-color: #e0e0e0;
     color: rgb(0, 0, 0);
     width: 250 px;
@@ -81,7 +81,7 @@
     text-decoration: none;
 }
 
-.cancel_staff:hover{
+.cancel_event:hover{
     text-decoration: none;
     background-color: #cbcbcb;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);

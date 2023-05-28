@@ -25,7 +25,7 @@
 <body>
     <?php include_once('staffheader.php'); ?>
     <div class="h5 text-center mb-5 mt-5"> Edit Staff Information </div>
-    <form action="updatestaff_db.php" method ="POST">
+    <form action="updatestaff_db.php" method ="POST"></form>
         <div class='container'>
         <div class='row'>
             <div class='col-sm-1'></div>
@@ -132,7 +132,7 @@
                     
                 </div><br> -->
 
-                <div class="center">
+                <div class="center"></div>
                     <input type="submit" name="update_staff" value='Update' class='add_staff mt-4'/>               
                     <a class ="cancel_staff mr-4" href="staffmember.php">Cancel</a>  
                 </div>
