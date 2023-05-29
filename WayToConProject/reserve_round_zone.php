@@ -3,6 +3,19 @@
     session_start();
 ?>
 
+<?php 
+    $showid = $_GET['id'];
+    $all = "SELECT * FROM showinfo s JOIN location l ON s.locationID = l.LocationID WHERE s.ShowID = '$showid'";
+    $query1 = mysqli_query($con,$all);
+    $row1 = mysqli_fetch_array($query1);
+
+    $showtime = "SELECT * FROM showinfo s JOIN showtime t ON s.ShowID = t.ShowID WHERE s.ShowID = '$showid' ORDER BY t.ShowDateTime";
+    $query2 = mysqli_query($con,$showtime);
+
+    $zone = "SELECT * FROM showinfo s JOIN zoneforshow h ON s.ShowID = h.ShowID WHERE s.ShowID = '$showid'";
+    $query3 = mysqli_query($con,$zone);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,14 +34,14 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class = container-fluid>
-        <h1 class="font-weight-bold mb-2">Concert Name</h1>
+        <h1 class="font-weight-bold mb-2"><?= $row1['ShowName'] ?></h1>
         <div class="row">
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
+                        <img src="image/<?= $row1['Poster'] ?>" width = "100%"alt="">
                         <div class="card-body">
-                            <h2 class="card-title mt-2">Concert</h2>
-                            <h5 class="card-title ">Venue</h5>
+                            <h2 class="card-title mt-2"><?= $row1['ShowName'] ?></h2>
+                            <h4 class="card-title "><?= $row1['LocationName'] ?></h4>
                         </div>
                     </div>
                 </div>
@@ -39,23 +52,29 @@
                             <div class="box">
                                 <div class="row">
                                     <div class="col-5">
-                                        <select id="show_time" name="show_time">
-                                            <option value="concert">Concert</option>
-                                            <option value="sport">Sport</option>
-                                            <option value="show">Show</option>
-                                        </select>
+                                        <form action="" method="get">
+                                            <select id="show_time" name="show_time">
+                                            <?php while($row2 = mysqli_fetch_array($query2)) { ?>
+                                                <option value="<?= $row2['ShowtimeID'] ?>"><?= $row2['ShowDateTime'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <input type="hidden" name="id" value="Choose options">
+                                        </form>
                                     </div>
                                     <div class="col-4 ">
+                                    <form action="" method="get">
                                         <select id="zone" name="zone">
-                                            <option value="concert">Concert</option>
-                                            <option value="sport">Sport</option>
-                                            <option value="show">Show</option>
+                                        <?php while($row3 = mysqli_fetch_array($query3)) { ?>
+                                            <option value="<?= $row3['ZoneForShowID'] ?>"><?= $row3['ZoneForShowName'] ?></option>
+                                            <?php } ?>
                                         </select>
+                                        <input type="hidden" name="id" value="Choose options">
+                                    </form>
                                     </div>
                                 </div>
                             </div>
                             <h4 class = "align-self-center">preview</h4>
-                            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "40%"alt="">
+                            <img src="image/<?= $row1['SeatingMap'] ?>" width = "60%"alt="">
                         </div>
                     </div>
                 </div>
@@ -64,13 +83,25 @@
             <div class="col-12 col-lg-6 mt-3 align-self-md-center">
                 <a href="user_concert_detail.php" class="back-button mb-2">Back</a>
             </div>
+
             <div class="col-12 col-lg-6 mt-2 align-self-md-center">
-                <a href="reserve_seat.php" class="next-button mb-2">Next</a>
+                <a id="next" href="reserve_seat.php?id=<?= $row1['ShowID'] ?>" onclick="addQueryParams(event)" class="next-button mb-2">Next</a>
             </div>
         </div>
         
     </div> 
         <script src = js/bootstrap-grid.min.js></script>
+        <script>
+        function addQueryParams(event) {
+            event.preventDefault();
+            var showTime = encodeURIComponent(document.getElementById('show_time').value);
+            var zone = encodeURIComponent(document.getElementById('zone').value);
+            var nextUrl = document.getElementById('next').getAttribute('href');
+            nextUrl += '&show_time=' + showTime + '&zone=' + zone;
+            location.href = nextUrl;
+        }
+</script>
+        
 </body>
 </html>
 

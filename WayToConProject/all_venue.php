@@ -95,7 +95,7 @@ $result = mysqli_query($con, $venuequery);
                         </td>
                         <?php if ($i === 0) { ?>
                             <td rowspan="<?= $maxCount ?>"><a class='edit_staff mt=1'
-                                    href="updatestaff.php?id=<?= $row['LocationID'] ?>">Edit</a></td>
+                                    href="update_venue.php?id=<?= $row['LocationID'] ?>">Edit</a></td>
                             <td rowspan="<?= $maxCount ?>"><a class='delete_staff mt=1'
                                     href="deletevenue.php?id=<?= $row['LocationID'] ?>"
                                     onclick="confirmdel(this.href);return false;">Delete</a></td>
@@ -107,6 +107,7 @@ $result = mysqli_query($con, $venuequery);
 
         <a class='add_venue mt=1' href="staff_create_new_venue.php">Add New Venue</a>
         <a class='add_venue mt=1' href="newseat.php">Add New Seat</a>
+        <a class='add_venue mt=1' href="deletezone.php">Delete Zone</a>
     </div>
 </body>
 

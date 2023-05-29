@@ -3,16 +3,19 @@
 session_start();
 include('server.php');
 
-$staff_id = $_SESSION['staff_id'];
+$user_id = $_SESSION['user_id'];
 
 if (isset($_POST['update_profile'])) {
 
     $update_firstname = mysqli_real_escape_string($con, $_POST['update_firstname']);
     $update_lastname = mysqli_real_escape_string($con, $_POST['update_lastname']);
+    $update_dob = mysqli_real_escape_string($con, $_POST['update_dob']);
+    $update_gender = mysqli_real_escape_string($con, $_POST['update_gender']);
     $update_phone = mysqli_real_escape_string($con, $_POST['update_phone']);
+    $update_address = mysqli_real_escape_string($con, $_POST['update_address']);
     $update_email = mysqli_real_escape_string($con, $_POST['update_email']);
 
-    mysqli_query($con, "UPDATE `staff` SET StaffFirstName = '$update_firstname', StaffLastName = '$update_lastname', StaffEmail = '$update_email', StaffPhone = '$update_phone' WHERE StaffID = '$staff_id'") or die('query failed');
+    mysqli_query($con, "UPDATE `user` SET UserFirstName = '$update_firstname', UserLastName = '$update_lastname', UserDOB = '$update_dob', UserGender = '$update_gender', UserPhone = '$update_phone', UserAddress = '$update_address', UserEmail = '$update_email' WHERE UserID = '$user_id'") or die('query failed');
     $_SESSION['update_success'] = true;
 }
 
@@ -37,7 +40,12 @@ if (isset($_POST['update_profile'])) {
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
-
+    <style>
+        .gender-label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,7 +53,7 @@ if (isset($_POST['update_profile'])) {
     <div class="update-profile">
 
         <?php
-        $select = mysqli_query($con, "SELECT * FROM Staff WHERE StaffID = '$staff_id'") or die('Query failed');
+        $select = mysqli_query($con, "SELECT * FROM user WHERE UserID = '$user_id'") or die('Query failed');
         if (mysqli_num_rows($select) > 0) {
             $fetch = mysqli_fetch_assoc($select);
         }
@@ -74,20 +82,37 @@ if (isset($_POST['update_profile'])) {
                 <div class="inputBox">
                     <span>First Name :</span>
                     <input type="text" maxlength="20" name="update_firstname"
-                        value="<?php echo $fetch['StaffFirstName']; ?>" class="box">
+                        value="<?php echo $fetch['UserFirstName']; ?>" class="box">
                     <span>Last Name :</span>
                     <input type="text" maxlength="20" name="update_lastname"
-                        value="<?php echo $fetch['StaffLastName']; ?>" class="box">
+                        value="<?php echo $fetch['UserLastName']; ?>" class="box">
+                    <span>Date of Birth :</span>
+                    <input type="date" name="update_dob" value="<?php echo $fetch['UserDOB']; ?>" class="box">
+
+                    <span>Gender:</span>
+                    <label class="gender-label">
+                        <input type="radio" id="male" name="update_gender" value="M" <?php if ($fetch['UserGender'] === 'M')
+                            echo 'checked'; ?> />
+                        <span>Male</span>
+                    </label>
+                    <label class="gender-label">
+                        <input type="radio" id="female" name="update_gender" value="F" <?php if ($fetch['UserGender'] === 'F')
+                            echo 'checked'; ?> />
+                        <span>Female</span>
+                    </label>
+
                     <span>Phone :</span>
                     <input type="text" maxlength="10" minlength="10" name="update_phone"
-                        value="<?php echo $fetch['StaffPhone']; ?>" class="box">
+                        value="<?php echo $fetch['UserPhone']; ?>" class="box">
+                    <span>Address :</span>
+                    <textarea name="update_address" class="box"><?php echo $fetch['UserAddress']; ?></textarea>
                     <span>Email :</span>
-                    <input type="email" maxlength="30" name="update_email" value="<?php echo $fetch['StaffEmail']; ?>"
+                    <input type="email" maxlength="30" name="update_email" value="<?php echo $fetch['UserEmail']; ?>"
                         class="box" readonly>
                 </div>
             </div>
             <input type="submit" value="update profile" name="update_profile" class="btn">
-            <a href="staffprofile.php" class="delete-btn">go back</a>
+            <a href="user.php" class="delete-btn">go back</a>
         </form>
 
     </div>

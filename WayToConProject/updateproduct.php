@@ -27,7 +27,7 @@ $row = mysqli_fetch_array($result);
 <body>
     <?php include_once('staffheader.php'); ?>
     <div class="h5 text-center mb-5 mt-5"> Edit Product Information </div>
-    <form action="updateproduct_db.php" method="POST">
+    <form action="updateproduct_db.php" method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">

@@ -23,7 +23,7 @@ if (isset($_POST['login_staff'])) {
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $_SESSION['StaffEmail'] = $email;
-            $_SESSION['user_id'] = $row['StaffID'];
+            $_SESSION['staff_id'] = $row['StaffID'];
             header('location: staffprofile.php');
             exit;
         } else {

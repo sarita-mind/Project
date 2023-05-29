@@ -15,6 +15,14 @@
 */
 ?>
 
+<?php 
+    
+            $all = 'SELECT * FROM (showinfo s JOIN showtime t ON s.ShowID = t.ShowID) JOIN location l ON s.locationID = l.LocationID WHERE s.SaleDate < CURDATE() ORDER BY SaleDate';
+            $query1 = mysqli_query($con,$all);
+
+            $upcoming = 'SELECT * FROM (showinfo s JOIN showtime t ON s.ShowID = t.ShowID) JOIN location l ON s.locationID = l.LocationID WHERE s.SaleDate > CURDATE() ORDER BY SaleDate';
+            $query2 = mysqli_query($con,$upcoming);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,94 +35,58 @@
     <link rel = "stylesheet" href = "css/bootstrap-grid.min.css">
 </head>
 <body>
+
     <?php include_once('header.php'); ?>
-        <div class = container-fluid>
-            <!-- First Row [Popular]-->
-            <h2 class="font-weight-bold mb-2">Popular Event</h2>
-            <div class="row">
+
+    <div class = container-fluid>
+        <!-- First Row [All]-->
+        <h2 class="font-weight-bold mb-2">All Event</h2>
+        <div class="row">
+
+        <?php while($row = mysqli_fetch_array($query1)) { ?>
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <a href="#" class="card-button"> Buy Now</a>
-                            </div>
+                        <div class="card-img">
+                            <img src="image/<?= $row['Poster'] ?>" width = "100%"alt="">
+                        </div>
+                        <div class="card-body">
+                            <h4 class = "showname"><a href="user_concert_detail.php" class="card-title"><?= $row['ShowName'] ?></a></h4>
+                            <p class="card-text">
+                                <?= $row['ShowDateTime'] ?>
+                                <br>
+                                <?= $row['LocationName'] ?>
+                            </p>
+                            <a href="user_concert_detail.php?id=<?=$row['ShowID']?>" class="card-button"> Buy Now</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <a href="#" class="card-button"> Buy Now</a>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <a href="#" class="card-button"> Buy Now</a>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <a href="#" class="card-button"> Buy Now</a>
-                            </div>
-                    </div>
-                </div>
-            </div>
+        <?php  }  ?>
+    </div>
             <br>
             <!-- Second Row [Upcoming]-->
             <h2 class="font-weight-bold mb-2">Upcoming Event</h2>
             <div class="row">
+            <?php while($row = mysqli_fetch_array($query2)) { ?>
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
+                        <div class="card-img">
+                            <img src="image/<?= $row['Poster'] ?>" width = "100%"alt="">
+                        </div>
+                        <div class="card-body">
+                            <h4 class = "showname"><a href="user_concert_detail.php" class="card-title"><?= $row['ShowName'] ?></a></h4>
+                            <p class="card-text">
+                                <?= $row['ShowDateTime'] ?>
+                                <br>
+                                <?= $row['LocationName'] ?>
+                            </p>
+                            <a href="user_concert_detail.php?id=<?=$row['ShowID']?>" class="card-upcoming-button">Upcoming</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                            <div class="card-body">
-                                <h3><a href="#" class="card-title">Concert</a></h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                    </div>
-                </div>
+            <?php  }  ?>
             </div>
         </div>   
-        <script src = js/bootstrap-grid.min.js></script> 
+        
 </body>
+    
 </html>

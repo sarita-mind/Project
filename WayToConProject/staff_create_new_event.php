@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-include_once('server.php');
+include_once('server.php'); 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -12,6 +12,7 @@ if (isset($_SESSION['upload_status'])) {
     unset($_SESSION['upload_status']);
 }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,13 +38,12 @@ if (isset($_SESSION['upload_status'])) {
             <h2>Event Name and Show Type</h2>
             <div class="box">
                 <input type="text" id="event_name" name="event_name" placeholder="Event name">
-                <select id="show_type" name="show_type"> 
+                <select id="show_type" name="show_type"> <!-- Make sure the name attribute matches -->
                     <option value="Concert">Concert</option>
                     <option value="Sport">Sport</option>
                     <option value="Show">Show</option>
                 </select>
             </div>
-
 
             <h2>Event Details</h2>
             <div class="box">
@@ -61,7 +61,7 @@ if (isset($_SESSION['upload_status'])) {
             </div>
 
             <h2>Sale Date</h2>
-            <div class="box">
+            <div class="box" id="sale-dates-container">
                 <input type="datetime-local" id="sale_date" name="sale_date"><br><br>
             </div>
 
@@ -74,40 +74,38 @@ if (isset($_SESSION['upload_status'])) {
             <h2>Location</h2>
             <div class="box">
                 <select id="location" name="location" required>
-                <option value="" disabled selected hidden>Select Location</option>
-                        <?php
-                        $locationQuery = "SELECT * FROM location ORDER BY LocationName";
-                        $locationResult = mysqli_query($con, $locationQuery);
+                    <option value="" disabled selected hidden>Select Location</option>
+                    <?php
+                    $locationQuery = "SELECT * FROM location ORDER BY LocationName";
+                    $locationResult = mysqli_query($con, $locationQuery);
 
-                        if ($locationResult && mysqli_num_rows($locationResult) > 0) {
-                            while ($row = mysqli_fetch_assoc($locationResult)) {
-                                echo '<option value="' . $row['LocationName'] . '">' . $row['LocationName'] . '</option>';
-                            }
-                        } else {
-                            echo '<option value="">No locations found</option>';
+                    if ($locationResult && mysqli_num_rows($locationResult) > 0) {
+                        while ($row = mysqli_fetch_assoc($locationResult)) {
+                            echo '<option value="' . $row['LocationName'] . '">' . $row['LocationName'] . '</option>';
                         }
+                    } else {
+                        echo '<option value="">No locations found</option>';
+                    }
 
-                        mysqli_close($con);
-                        ?>
+                    mysqli_close($con);
+                    ?>
                 </select>
             </div>
 
             <h2>Zone</h2>
-            <div class="box">
-                <div id="zones-container">
-                    <div class="zone-slot">
-                        <p>Zone 1</p>
-                        <input type="text" name="zone[]" placeholder="Zone Name">
-                        <input type="number" name="zone_price[]" min="0" placeholder="Zone Price">
-                        <select name="zone_type[]">
-                            <option value="stand">Stand</option>
-                            <option value="sit">Sit</option>
-                        </select>
-                        <input type="number" name="zone_seats[]" min="1" placeholder="Number of Seats (1-99999)">
-                        <button type="button" class="delete-zone-btn">Delete this zone</button>
-                    </div>
-                    <button type="button" id="add_zone_new_slot">Add New Zone</button>
+            <div class="box" id="zones-container">
+                <div class="zone-slot">
+                    <p>Zone 1</p>
+                    <input type="text" name="zone_name[]" placeholder="Zone Name">
+                    <input type="number" name="zone_price[]" min="0" placeholder="Zone Price">
+                    <select name="zone_type[]">
+                        <option value="stand">Stand</option>
+                        <option value="sit">Sit</option>
+                    </select>
+                    <input type="number" name="zone_seats[]" min="0" placeholder="Number of Seats">
+                    <button type="button">Delete this zone</button>
                 </div>
+                <button type="button" id="add_zone_new_slot">Add New Zone</button>
             </div>
 
             <h2>Zone and Seating Picture</h2>
@@ -119,46 +117,5 @@ if (isset($_SESSION['upload_status'])) {
             <input type="submit" value="Create New Event">
         </form>
     </div>
-
-    <script>
-        // Add event listener to dynamically added delete zone buttons
-        const deleteZoneButtons = document.querySelectorAll('.delete-zone-btn');
-        deleteZoneButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                button.parentElement.remove();
-            });
-        });
-
-        // Add new zone slot
-        const addZoneButton = document.getElementById('add_zone_new_slot');
-        const zonesContainer = document.getElementById('zones-container');
-        let zoneCount = 1;
-
-        addZoneButton.addEventListener('click', () => {
-            const newZoneSlot = document.createElement('div');
-            newZoneSlot.classList.add('zone-slot');
-            zoneCount++;
-
-            newZoneSlot.innerHTML = `
-                <p>Zone ${zoneCount}</p>
-                <input type="text" name="zone[]" placeholder="Zone Name">
-                <input type="number" name="zone_price[]" min="0" placeholder="Zone Price">
-                <select name="zone_type[]">
-                    <option value="stand">Stand</option>
-                    <option value="sit">Sit</option>
-                </select>
-                <input type="number" name="zone_seats[]" min="1" placeholder="Number of Seats (1-99999)">
-                <button type="button" class="delete-zone-btn">Delete this zone</button>
-            `;
-
-            zonesContainer.insertBefore(newZoneSlot, addZoneButton);
-
-            // Add event listener to delete zone button
-            const newDeleteZoneButton = newZoneSlot.querySelector('.delete-zone-btn');
-            newDeleteZoneButton.addEventListener('click', () => {
-                newZoneSlot.remove();
-            });
-        });
-    </script>
 </body>
 </html>

@@ -30,6 +30,7 @@ if (isset($_POST['update_product'])) {
         $new_image_name = $_FILES['newproduct_image']['name'];
         $image_upload_path = "./image/" . $new_image_name;
         move_uploaded_file($_FILES['newproduct_image']['tmp_name'], $image_upload_path);
+       
     } else {
         $new_image_name = $_POST['old_product_image'];
     }

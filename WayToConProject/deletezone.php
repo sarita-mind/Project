@@ -10,15 +10,17 @@ $venuequery = 'SELECT l.LocationID, l.LocationName, z.ZoneID, zo.ZoneTypeName, z
                ORDER BY l.LocationID, z.ZoneID, zo.ZonetypeID, s.SeatID';
 $result = mysqli_query($con, $venuequery);
 
-// Check if the form is submitted
-if (isset($_POST['add_seat'])) {
+// Check if the form is submitted for zone deletion
+if (isset($_POST['delete_zone'])) {
     $zoneID = $_POST['zone_id'];
-    $seatNumber = $_POST['seat_number'];
-    $seatRow = $_POST['seat_row'];
 
-    // Insert the seat into the database
-    $insertQuery = "INSERT INTO seat (ZoneID, SeatNo, SeatRow) VALUES ('$zoneID', '$seatNumber', '$seatRow')";
-    mysqli_query($con, $insertQuery);
+    // Delete the associated seats first
+    $deleteSeatsQuery = "DELETE FROM seat WHERE ZoneID = '$zoneID'";
+    mysqli_query($con, $deleteSeatsQuery);
+
+    // Delete the zone from the database
+    $deleteZoneQuery = "DELETE FROM zone WHERE ZoneID = '$zoneID'";
+    mysqli_query($con, $deleteZoneQuery);
 
     // Redirect to a success page or perform any other desired actions
     header('Location: all_venue.php');
@@ -45,7 +47,7 @@ if (isset($_POST['add_seat'])) {
 <body>
     <?php include_once('staffheader.php'); ?>
     <div class="container">
-        <form action="newseat.php" method="POST">
+        <form action="deletezone.php" method="POST">
             <div class="center">
                 <h1>Add Seats</h1>
 
@@ -75,15 +77,7 @@ if (isset($_POST['add_seat'])) {
                 </div>
 
                 <div class="box">
-                    <input type="text" id="seat_number" name="seat_number" placeholder="Seat Number" required />
-                </div>
-
-                <div class="box">
-                    <input type="text" id="seat_row" name="seat_row" placeholder="Seat Row" required />
-                </div>
-
-                <div class="box">
-                    <input type="submit" name="add_seat" value="Add Seat" />
+                    <input type="submit" name="delete_zone" value="Delete Zone" />
                     <br />
                     <a href="all_venue.php" class="cancel_staff"><span>Cancel</span></a>
                 </div>

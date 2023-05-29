@@ -16,12 +16,12 @@
                 <div class="container">
                     <div class="header-con">
                         <div class="logo-container">
-                            <a href="#">
+                            <a href="staff.php">
                                 <img src='./image/Logo.png' alt="Logo"/>
                             </a>
                         </div>
                         <div class="stafflogo-container">
-                            <a href="#">
+                            <a href="staffprofile.php">
                                 <img src='./image/StaffLogo.png' alt="Logo"/>
                             </a>
                         </div>
@@ -34,20 +34,29 @@
                                 <a href="staffmember.php">Staff</a>
                             </li>
 
-                            <li class="menu-link" >
-                                <a href="staff_create_new_event.php">Event</a>
+                            <li class="dropdown" >
+                                <a href="#">Event</a>
+                                <div class="dropdown-content">
+                                    <a href="all_event.php">All Event</a>
+                                    <a href="staffallevent.php">All Booking</a>
+                                    <a href="event-sales-report.php">Event Sales Report</a>
+                                </div>
                             </li>
-                        <li class="menu-link">
-                            <a href="giftshop.php">Gift Shop</a>
-                        </li>
-                        <li class="menu-link">
-                            <a href="#">Client</a>
-                        </li>
+
+                            <li class="dropdown" >
+                                <a href="#">Gift Shop</a>
+                                <div class="dropdown-content">
+                                    <a href="all_product.php">All Product</a>
+                                    <a href="staffallorder.php">All Order</a>
+                                    <a href="giftshop-sales-report.php">Giftshop Sales Report</a>
+                                </div>
+                            </li>
+
                         <li class="menu-link">
                             <a href="all_venue.php">Venue</a>
                         </li>
                         <li class="menu-link">
-                            <a href="#">Dashboard</a>
+                            <a href="staffdashboard.php">Dashboard</a>
                         </li>
                     </ul>
                     <div class="login-btn">

@@ -1,6 +1,34 @@
 <?php
     include('server.php');
     session_start();
+?>
+
+<?php 
+    $showid = $_GET['id'];
+    $roundselect = $_GET['show_time'];
+    $zoneselect = $_GET['zone'];
+
+    $all = "SELECT * FROM showinfo s JOIN location l ON s.locationID = l.LocationID WHERE s.ShowID = '$showid'";
+    $query1 = mysqli_query($con,$all);
+    $row1 = mysqli_fetch_array($query1);
+
+    $showtime = "SELECT * FROM showinfo s JOIN showtime t ON s.ShowID = t.ShowID WHERE s.ShowID = '$roundselect' ORDER BY t.ShowDateTime";
+    $query2 = mysqli_query($con,$showtime);
+    $row2 = mysqli_fetch_array($query2);
+
+    $zone = "SELECT * FROM showinfo s JOIN zoneforshow h ON s.ShowID = h.ShowID WHERE s.ShowID = '$zoneselect'";
+    $query3 = mysqli_query($con,$zone);
+    $row3 = mysqli_fetch_array($query3);
+
+    $seat = "SELECT * FROM ((showtime t JOIN showinfo s ON t.ShowID = s.ShowID )JOIN zoneforshow h ON s.ShowID = h.ShowID) JOIN seatforshow f ON h.ZoneForShowID = f.ZoneForShowID JOIN seat z ON f.SeatID = z.SeatID WHERE s.ShowID = '$showid' AND t.ShowTimeID = $roundselect AND h.ZoneforShowID =  $zoneselect ";
+    $query4 = mysqli_query($con,$seat);
+    
+    $seat = "SELECT * FROM ((showtime t JOIN showinfo s ON t.ShowID = s.ShowID )JOIN zoneforshow h ON s.ShowID = h.ShowID) JOIN seatforshow f ON h.ZoneForShowID = f.ZoneForShowID JOIN seat z ON f.SeatID = z.SeatID WHERE s.ShowID = '$showid' AND t.ShowTimeID = $roundselect AND h.ZoneforShowID =  $zoneselect ";
+    $query5 = mysqli_query($con,$seat);
+    $row5 = mysqli_fetch_array($query5);
+
+
+
 
 ?>
 
@@ -22,31 +50,21 @@
 
 <body>
     <?php include_once('header.php'); ?>
-    <!-- <?php /* 
-    
-            $event = 'SELECT * FROM (showinfo s JOIN showtime t ON s.ShowID = t.ShowID) JOIN location l ON s.locationID = l.LocationID; ';
-            $query1 = mysqli_query($con,$event);
-
-            $seat = 'SELECT * FROM zoneforshow,seatforshow,showinfo WHERE showinfo.ShowID = zoneforshow.ShowID AND zoneforshow.ZoneID = seatforshow.ZoneID' ;
-            $query2 = mysqli_query($con,$seat);
-
-            $seat = 'SELECT * FROM (showinfo s JOIN zoneforshow z ON s.ShowID = z.ShowID) JOIN seatforshow f ON z.ZoneID = f.ZoneID';
-    */ ?> -->
         <!-- <? /* php while($row1 = mysqli_fetch_array($query1) &  $row2 = mysqli_fetch_array($query2)) {    } */ ?>--> 
     
-    <div class = container-fluid>
-        <h1 class="font-weight-bold mb-2"><?=$row1['ShowName'] ?></h1>
-        <div class="row">
-                <div class="col-md-3">
+    <div class = "container-md " >
+        <h1 class="font-weight-bold mtb-4"><?=$row1['ShowName'] ?></h1>
+        <div class="row ">
+                <div class="col-md-3 mt-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
+                        <img src="image/<?=$row1['Poster'] ?>" width = "100%"alt="">
                         <div class="card-body">
                             <h2 class="card-title mt-2"><?=$row1['ShowName'] ?></h2>
-                            <h5 class="card-title ">Venue</h5>
+                            <h5 class="card-title "><?=$row1['LocationName'] ?></h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9 ">
+                <div class="col-md-9 mt-4">
                     <div class="booking">
                         <div class="inner-wrapper">
                         <div class="col-12">
@@ -60,7 +78,7 @@
                                                     <ul class="seat-type">
                                                         <li>
                                                             <span class="ico" style = "background-color : #ADFF00;"></span>
-                                                            <span class="txt">3,500</span>
+                                                            <span class="txt"><?=$row5['Price'] ?> THB </span>
                                                         </li>
                                                         <li>
                                                             <span class="ico ico-seat-select" style = "background-color : #00D1FF"></span>
@@ -79,33 +97,18 @@
                                                             <div class="seat-table">
                                                                 <table id = "tableseats" >
                                                                     <tbody>
-                                                                        <tr class = "H12345">
-                                                                            <td class="headrow">Q</td>
-                                                                            <td class="skiprow" colspan="2"></td>
-                                                                            <td title="Q-13" class="not-available">
-                                                                                <div class="seatnotavail">&nbsp;</div>
-                                                                            </td>
-                                                                            <td title ="Q-14">
-                                                                                <div class="seatuncheck" id = "checkseat-GG-14" data-seat="GG-14-P*1900" data-seatk = "fcc237c2217378d2a759b504a9fdab43" onclick="clicked(this)">
-                                                                                    <span>14</span>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td title="Q-15">
-                                                                                <div class="seatuncheck" id = "checkseat-GG-15" data-seat="GG-15-P*1900" data-seatk = "8d49d85b404e2602fcdec8fd6baa8f8" onclick="clicked(this)">
-                                                                                    <span>15</span>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                           
-                                                                             <!-- <tr class = <? /* =$row1['ZoneForShowID'] */?>> 
-                                                                                <td class="headrow"> <? /* =$row1['SeatRow'] */ ?> </td>
+                                                                             <tr class = <?= $row5['ZoneForShowID'] ?>> 
+                                                                                <td class="headrow"> <?= $row5['SeatRow'] ?> </td>
                                                                                 <td class="skiprow" colspan="2"></td>
-                                                                                <td title=<? /* =$row1['SeatNo'] */?>>
-                                                                                    <div class="seatuncheck" id =<? /* =$row1['SeatForShowID'] */?> onclick="clicked(this)">
-                                                                                        <span><? /* =$row1['SeatNo'] */ ?></span>
+                                                                                <?php while($row4 = mysqli_fetch_array($query4)) { ?>
+                                                                                <td title=<?= $row4['SeatNo'] ?>>
+                                                                                    <div class="seatuncheck" id =<?=$row4['SeatForShowID'] ?> onclick="clicked(this)">
+                                                                                        <span><?=$row4['SeatNo']?></span>
                                                                                     </div>
                                                                                 </td>
-                                                                            </tr> -->
+                                                                                <?php } ?>
+                                                                            </tr>
+                                                                            
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -122,60 +125,39 @@
                             <div class="container-md">
                             <div class="ticketinfo col-11">
                                 <table id = "Ticket-Info">
-                                    <thead>
+                                    <tbody >
                                         <tr>
                                             <th scope = "row">Round</th>
+                                            <td><?=$row2['ShowDateTime']?></td>
                                             
                                         </tr>
                                         <tr>
                                             <th scope = "row">Zone</th>
+                                            <td><?=$row5['ZoneForShowName']?></td>
                                             
                                         </tr>
                                         <tr>
                                             <th scope = "row">Seat No</th>
+                                            <td ><ul id="seatNumbers"></ul></td>
 
                                         </tr>
                                         <tr>
                                             
                                             <th scope = "row">Quantity</th>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <th scope = "row">Unit Price(baht)</th>
-
-                                        </tr>
-                                        <tr>
-                                            <th scope = "row">Total Price(baht)</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                            <td><?=$row['ShowDateTime']?></td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td><?=$row['ZoneForShowName']?></td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td><?=$row['SeatNo']?></td>
-
-                                        </tr>
-                                        <tr>
-                                            
                                             <td id="quantity"></td>
                                             
                                         </tr>
                                         <tr>
-                                            <td id="unitPrice"><?=$row['Price']?></td>
+                                            <th scope = "row">Unit Price (THB)</th>
+                                            <td id="unitPrice"><?=$row5['Price']?></td>
 
                                         </tr>
                                         <tr>
+                                            <th scope = "row">Total Price (THB)</th>
                                             <td id="totalPrice"></td>
+
                                         </tr>
                                     </tbody>
-
                                 </table>
                             </div>
                             </div>
@@ -189,13 +171,12 @@
                 <a href="reserve_round_zone.php" class="back-button mb-2">Back</a>
             </div>
             <div class="col-12 col-lg-6 mt-2 align-self-md-center">
-                <a href="reserve_seat.php" class="next-button mb-2">Next</a>
+                <a href="#" class="next-button mb-2">Next</a>
             </div>
         </div>
         
     </div> 
         
-        <?php /*  } */?> 
         <script src = js/bootstrap-grid.min.js></script>
         <script>
 
@@ -207,47 +188,53 @@
                     element.classList.remove('seatchecked');
                     element.classList.add('seatuncheck');
                 }
+
+                showTicketInformation();
             }
 
             function showTicketInformation() {
             var checkedSeats = document.getElementsByClassName("seatchecked");
-            var ticketTable = document.getElementById("Ticket-Info");
             var quantity = checkedSeats.length;
-            var unitPrice = checkedSeats.dataset.Price;
+            var unitPrice = parseInt(document.getElementById("unitPrice").textContent);
             var totalPrice = quantity * unitPrice;
 
-            // Clear previous ticket information
-            ticketTable.innerHTML = "";
-
-            // Iterate over checked seats and populate the ticket information table
-            for (var i = 0; i < checkedSeats.length; i++) {
-                if (checkedSeats.length <= seat.dataset.LimitTicket)
-            var seat = checkedSeats[i];
-            var row = document.createElement("tr");
-            row.innerHTML = "<td>" + seat.dataset.showDateTime + "</td>" +
-                            "<td>" + seat.dataset.zoneForShowName + "</td>" +
-                            "<td>" + seat.dataset.seatNo + "</td>";
-
-            ticketTable.appendChild(row);
-            }
-            var quantityRow = document.createElement("tr");
-            quantityRow.innerHTML = "<th scope='row'>Quantity</th><td>" + quantity + "</td>";
-            ticketTable.appendChild(quantityRow);
-
-            var unitPriceRow = document.createElement("tr");
-            unitPriceRow.innerHTML = "<th scope='row'>Unit Price(baht)</th><td>" + unitPrice + "</td>";
-            ticketTable.appendChild(unitPriceRow);
-
-            var totalPriceRow = document.createElement("tr");
-            totalPriceRow.innerHTML = "<th scope='row'>Total Price(baht)</th><td>" + totalPrice + "</td>";
-            ticketTable.appendChild(totalPriceRow);
 
             document.getElementById("quantity").textContent = quantity;
             document.getElementById("totalPrice").textContent = totalPrice;
 
-}
+            var seatNumbers = document.getElementById("seatNumbers");
+            seatNumbers.innerHTML = "";
 
-        
+    
+            for (var i = 0; i < checkedSeats.length; i++) {
+                var seatNumber = checkedSeats[i].querySelector("span").textContent;
+                var seatNumberElement = document.createElement("li");
+                seatNumberElement.textContent = seatNumber;
+                seatNumbers.appendChild(seatNumberElement);
+            }
+            
+            var nextButton = document.querySelector(".next-button");
+            nextButton.addEventListener("click", markCheckedSeatsAsUnavailable);
+
+            function markCheckedSeatsAsUnavailable() {
+                var checkedSeats = document.getElementsByClassName("seatchecked"); 
+                for (var i = 0; i < checkedSeats.length; i++) {
+                    var seat = checkedSeats[i];
+                    seat.classList.remove("seatchecked");
+                    seat.classList.add("not-available");
+                    }
+            }
+
+            }
+
+            function addQueryParams(event) {
+            event.preventDefault();
+            var showTime = encodeURIComponent(document.getElementById('show_time').value);
+            var zone = encodeURIComponent(document.getElementById('zone').value);
+            var nextUrl = document.getElementById('next').getAttribute('href');
+            nextUrl += '&show_time=' + showTime + '&zone=' + zone;
+            location.href = nextUrl;
+        }
         </script>
 </body>
 </html>

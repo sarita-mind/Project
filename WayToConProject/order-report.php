@@ -13,13 +13,20 @@
         header('location:userlogin.php');
     }
 
-    if(!isset($_SESSION['OrderID'])){
+    if((!isset($_SESSION['OrderID'])) & (!isset($_GET['id']))){
         $_SESSION['message'] = 'You must order first';
         header('location:giftshop.php');
     }
+    if(!isset($_GET['id']))
+    {
+        $sql = "SELECT * FROM giftshoporder g JOIN user u ON g.UserID = u.UserID WHERE OrderID = '".$_SESSION['OrderID']."'";
+    }
+    if(!isset($_SESSION['OrderID']))
+    {
+        $sql = "SELECT * FROM giftshoporder g JOIN user u ON g.UserID = u.UserID WHERE OrderID = '".$_GET['id']."' ";
+    }
 
     
-    $sql = "SELECT * FROM giftshoporder g JOIN user u ON g.UserID = u.UserID WHERE OrderID = '".$_SESSION['OrderID']."'";
     $result =  mysqli_query($con,$sql);
     $row = mysqli_fetch_array($result);
     
@@ -43,7 +50,7 @@
     <?php include_once('header.php'); ?>
     <div class="container">
     <div class="alert alert-info h4 text-center mb-4 mt-5" role="alert">
-         Order Successfully 
+         Your Order 
     </div>
     <div class="row">
                 
@@ -120,7 +127,7 @@
             </div>
 
             <div class="cartheader mt-3 mr-4">
-                    <a class ="back text-center " href="giftshop.php">Back</a>      
+                    <a class ="back text-center " onclick="window.history.back();">Back</a>      
             </div><br><br><br>
             
         

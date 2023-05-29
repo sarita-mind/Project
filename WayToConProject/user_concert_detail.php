@@ -3,6 +3,19 @@
     session_start();
 ?>
 
+<?php 
+    
+    $showid = $_GET['id'];
+    $all = "SELECT * FROM showinfo s JOIN location l ON s.locationID = l.LocationID WHERE s.ShowID = '$showid'";
+    $query1 = mysqli_query($con,$all);
+    $row1 = mysqli_fetch_array($query1);
+
+    $showtime = "SELECT * FROM showinfo s JOIN showtime t ON s.ShowID = t.ShowID WHERE s.ShowID = '$showid'";
+    $query2 = mysqli_query($con,$showtime);
+
+    $zone = "SELECT * FROM showinfo s JOIN zoneforshow h ON s.ShowID = h.ShowID WHERE s.ShowID = '$showid'";
+    $query3 = mysqli_query($con,$zone);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +25,7 @@
     <title>Event_detail</title>
     <link rel = "stylesheet" href = "user_concert_detail.css">
     <link rel = "stylesheet" href = "css/bootstrap-grid.min.css">
+    <link rel="icon" type="image/x-icon" href="image/template.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" >
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,25 +34,23 @@
 
 <body>
     <?php include_once('header.php'); ?>
-    <?php 
-    
-            $sql = 'SELECT * FROM showinfo,showtime WHERE showinfo.showID = showtime.showID ';
-            $query1 = mysqli_query($con,$sql);
-            while($row = mysqli_fetch_array($query1)) { 
-        ?>
 
-        <h1 class="font-weight-bold mb-2">Concert Name</h1>
+    <div class="container-md mt-5">
+        <h1 class="font-weight-bold mtb-2"><?= $row1['ShowName'] ?></h1>
         <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mt-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                        <a href="#" class="card-button">Buy Now</a>
+                        <img src="image/<?= $row1['Poster'] ?>" width = "100%" alt="">
+                        <?php if($row1['SaleDate'] < date("Y-m-d")) : ?>
+                                <a href="reserve_round_zone.php?id=<?=$row1['ShowID']?>" class="card-button">Buy Now</a>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 mt-4">
                     <div class="info-card">
                         <div class="row">
                             <div class="col-5">
+                            <?php while($row2 = mysqli_fetch_array($query2)) { ?>
                                 <div class="showdate" >
                                     <div class="row">
                                         <div class="col-2 align-self-md-center px0" >
@@ -48,8 +60,9 @@
                                              <h5 class="card-title">Show Date</h5>
                                         </div>
                                     </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                                    <p class="card-text"><?= $row2['ShowDateTime'] ?></p>
                                 </div>
+                            <?php } ?>
                                 <div class="venue">
                                     <div class="row">
                                         <div class="col-2 align-self-md-center px0" >
@@ -59,20 +72,8 @@
                                             <h5 class="card-title">Venue</h5>
                                         </div>
                                     </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                                    <p class="card-text"><?= $row1['LocationName'] ?></p>
                                 </div>
-                                <div class="gateopen">
-                                    <div class="row">
-                                        <div class="col-2 align-self-md-center px0" >
-                                                <img src="./image/Vector-1.png" alt="">
-                                        </div>
-                                        <div class="col-10">
-                                            <h5 class="card-title">Gate Open</h5>
-                                        </div>
-                                    </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                </div>                               
-                                
                             </div>
                             <div class="col-5">
                                 <div class="saleopen">
@@ -84,19 +85,24 @@
                                             <h5 class="card-title">Sale Date</h5>
                                         </div>
                                     </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                                    <p class="card-text"><?= $row1['SaleDate'] ?></p>
                                 </div>
-                                <div class="price">
-                                    <div class="row">
-                                        <div class="col-2 align-self-md-center px0" >
-                                                <img src="./image/Vector-3.png" alt="">
+                                    <div class="price">
+                                        <div class="row">
+                                            <div class="col-2 align-self-md-center px0" >
+                                                    <img src="./image/Vector-3.png" alt="">
+                                            </div>
+                                            <div class="col-10">
+                                                <h5 class="card-title">Ticket Price</h5>
+                                            </div>
                                         </div>
-                                        <div class="col-10">
-                                            <h5 class="card-title">Ticket Price</h5>
-                                        </div>
+                                          <tr>
+                                            |
+                                            <?php while($row3 = mysqli_fetch_array($query3)) { ?>
+                                            <ul class="card-text"><?= $row3['Price'] ?> THB | </ul>
+                                            <?php } ?>
+                                          </tr>
                                     </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,26 +112,20 @@
             <div class="col-md-4 mt-2 ">
                 <div class="card">
                     <h3 class="Seating">Seating Plan</h3>                   
-                    <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" width = "100%"alt="">
-                </div>
-                <div class="card">
-                    <h3 class="condition">Condition of Sale</h3>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                    </div>
+                    <img src="image/<?= $row1['SeatingMap'] ?>" width = "100%"alt="">
                 </div>
             </div>
             <div class="col-md-8 mt-2 ">
                 <div class="card">
                     <h3 class="detail">Detail</h3>
                     <div class="detail-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                        <p class="card-text"><?= $row1['Description'] ?></p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
         <script src = js/bootstrap-grid.min.js></script>
 </body>
-    <?php  }  ?> 
 </html>
 

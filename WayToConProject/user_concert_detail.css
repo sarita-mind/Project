@@ -34,6 +34,11 @@ body {
     border-radius: 25px;
 }
 
+.price ul {
+    display: inline;
+    padding-left: 0px;
+}
+
 .card-button {
     display: flex;
     justify-content: center;
@@ -53,3 +58,10 @@ body {
     color: #fff;
 }
 
+.venue {
+    align-items: center;
+}
+
+.venue .card-text {
+    margin-top: 0;
+}

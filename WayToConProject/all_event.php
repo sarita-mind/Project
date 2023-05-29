@@ -70,7 +70,6 @@ $result = mysqli_query($con, $eventquery);
                 <th>Type of Zones</th>
                 <th>Number of Seats</th>
                 <th>Sale Date</th>
-                <th>Location ID</th>
                 <th>Location Name</th>
                 <th>Poster</th>
                 <th>Seating Map</th>
@@ -105,16 +104,19 @@ $result = mysqli_query($con, $eventquery);
                        <td>{$row['ZoneName']}</td>
                        <td>{$row['ZonePrice']}</td>
                        <td>{$row['TypeofZones']}</td>
+
+
                        <td>{$row['NumberofSeats']}</td>
                        <td rowspan='{$rowspanCount}'>{$row['SaleDate']}</td>
-                       <td rowspan='{$rowspanCount}'>{$row['LocationID']}</td>
                        <td rowspan='{$rowspanCount}'>{$row['LocationName']}</td>
-                       <td rowspan='{$rowspanCount}'>{$row['Poster']}</td>
-                       <td rowspan='{$rowspanCount}'>{$row['SeatingMap']}</td>
+
+                       <td rowspan='{$rowspanCount}'><img src='uploads/{$row['Poster']}' alt='Poster'></td>
+                       <td rowspan='{$rowspanCount}'><img src='uploads/{$row['SeatingMap']}' alt='Seating Map'></td>
+                       
                        <td rowspan='{$rowspanCount}'>{$row['LimitTicket']}</td>
                        <td rowspan='{$rowspanCount}'>{$row['EventDetails']}</td>
-                       <td rowspan='{$rowspanCount}'><a class='edit_event mt=1' href='updateevent.php?id={$row['ShowID']}'>Edit</a></td>
-                       <td rowspan='{$rowspanCount}'><a class='delete_event mt=1' href='deleteevent.php?id={$row['ShowID']}' onclick='confirmdel(this.href);return false;'>Delete</a></td>
+                       <td rowspan='{$rowspanCount}'><a class='edit_event mt-1' href='updateevent.php?id={$row['ShowID']}'>Edit</a></td>
+                       <td rowspan='{$rowspanCount}'><a class='delete_event mt-1' href='deleteevent.php?id={$row['ShowID']}' onclick='confirmdel(this.href);return false;'>Delete</a></td>
                    </tr>";
                 } else {
                     echo "<tr>

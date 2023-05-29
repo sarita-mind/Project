@@ -1,7 +1,7 @@
 <?php 
     include('server.php');
 
-    $productquery = 'SELECT * FROM giftshop g JOIN giftshopcollection gcol ON g.ProductCollectionID = gcol.ProductCollectionID';
+    $productquery = 'SELECT * FROM giftshop g JOIN giftshopcollection gcol ON g.ProductCollectionID = gcol.ProductCollectionID ORDER BY g.ProductID ASC' ;
     $result =  mysqli_query($con,$productquery);
 ?>
 
@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WayToCon Staff</title>
+    <title>WayToCon Product</title>
     <link rel="icon" type="image/x-icon" href="image/template.png" />
     <link rel = "stylesheet" href = "staffmember.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">

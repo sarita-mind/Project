@@ -2,17 +2,17 @@
 session_start();
 include('server.php');
 
-if (!isset($_SESSION['staff_id'])) {
-    header('location: stafflogin.php');
+if (!isset($_SESSION['user_id'])) {
+    header('location: userlogin.php');
     exit;
 }
 
-$staff_id = $_SESSION['staff_id'];
+$user_id = $_SESSION['user_id'];
 
 if (isset($_GET['logout'])) {
-    unset($staff_id);
+    unset($user_id);
     session_destroy();
-    header('location: stafflogin.php');
+    header('location: userlogin.php');
     exit;
 }
 ?>
@@ -41,7 +41,7 @@ if (isset($_GET['logout'])) {
     <div class="container">
         <div class="profile">
             <?php
-            $select = mysqli_query($con, "SELECT * FROM Staff WHERE StaffID = '$staff_id'") or die('Query failed');
+            $select = mysqli_query($con, "SELECT * FROM user WHERE UserID = '$user_id'") or die('Query failed');
             if (mysqli_num_rows($select) > 0) {
                 $fetch = mysqli_fetch_assoc($select);
                 if (!empty($fetch['image'])) {
@@ -49,12 +49,14 @@ if (isset($_GET['logout'])) {
                 } else {
                     echo '<img src="image/default-avatar.png">';
                 }
-                echo '<h3>' . $fetch['StaffFirstName'] . '</h3>';
+                echo '<h3>' . $fetch['UserFirstName'] . '</h3>';
             }
             ?>
-            <a href="updatestaffprofile.php" class="btn">Update Profile</a>
-            <a href="stafflogin.php?logout=<?php echo $staff_id; ?>" class="delete-btn">Logout</a>
-            <p>New <a href="stafflogin.php">login</a> or <a href="staff.php">Go to Staff page</a></p>
+            <a href="updateuser.php" class="btn">Update Profile</a>
+            <a href="userallorder.php" class="btn2">Your Gift Shop Order</a>
+            <a href="userallbooking.php" class="btn2">Your Event Booking</a>
+            <a href="userlogin.php?logout=<?php echo $user_id; ?>" class="delete-btn">Logout</a>
+            <p>New <a href="userlogin.php">login</a> or <a href="index.php">Go Home</a></p>
         </div>
     </div>
 </body>

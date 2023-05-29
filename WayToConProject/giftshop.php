@@ -12,6 +12,7 @@
         $_SESSION['message'] = 'You must log in first';
         header('location:userlogin.php');
     }
+    unset($_SESSION['OrderID']);
     $gsquery = 'SELECT * FROM giftshop g JOIN giftshopcollection c ON g.ProductCollectionID = c.ProductCollectionID WHERE g.Stock > 0';
     $result =  mysqli_query($con,$gsquery);
 ?>
@@ -26,8 +27,8 @@
     <title>Gift Shop - WayToCon</title>
     <link rel="icon" type="image/x-icon" href="image/template.png"/>
     <link rel = "stylesheet" href = "giftshop.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.bundle.min.js" ></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

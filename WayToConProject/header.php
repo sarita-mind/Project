@@ -16,7 +16,7 @@
                 <div class="container">
                     <div class="header-con">
                         <div class="logo-container">
-                            <a href="#">
+                            <a href="index.php">
                                 <img src='./image/Logo.png' alt="Logo"/>
                             </a>
                         </div>

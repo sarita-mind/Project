@@ -4,26 +4,23 @@ include('server.php');
 $errors = array();
 
 if (isset($_POST['event_name']) && isset($_FILES['cover_image']) && isset($_FILES['zone_image'])) {
-
-    // Create a database connection
-    $con = mysqli_connect('localhost','root','','WayToCon');
-
-    // Check if the connection was successful
-    if (!$con) {
-        die('Failed to connect to MySQL: ' . mysqli_connect_error());
-    }
     $ShowName = mysqli_real_escape_string($con, $_POST['event_name']);
     $ShowType = mysqli_real_escape_string($con, $_POST['show_type']);
     $EventDetail = mysqli_real_escape_string($con, $_POST['event_detail']);
     $SaleDate = mysqli_real_escape_string($con, $_POST['sale_date']);
     $LimitOfTickets = mysqli_real_escape_string($con, $_POST['limit_of_tickets']);
     $Location = mysqli_real_escape_string($con, $_POST['location']);
-    $zones = $_POST['zone'];
-    $zonePrices = $_POST['zone_price'];
-    $zoneTypes = $_POST['zone_type'];
-    $zoneSeats = $_POST['zone_seats'];
+    $zones = isset($_POST['zone_name']) ? $_POST['zone_name'] : array();
+    $zonePrices = isset($_POST['zone_price']) ? $_POST['zone_price'] : array();
+    $zoneTypes = isset($_POST['zone_type']) ? $_POST['zone_type'] : array();
+    $zoneSeats = isset($_POST['zone_seats']) ? $_POST['zone_seats'] : array();
     $showDates = $_POST['show_date'];
 
+
+    var_dump($zones);
+    var_dump($zonePrices);
+    var_dump($zoneTypes);
+    var_dump($zoneSeats);
     if (empty($ShowName)) {
         $errors[] = "Please input the event name";
     }
@@ -40,7 +37,7 @@ if (isset($_POST['event_name']) && isset($_FILES['cover_image']) && isset($_FILE
         $errors[] = "Please input the limit of tickets";
     }
     if (empty($Location)) {
-        $errors[] = "Please input the location";
+        $errors[] = "Please select a location";
     }
 
     // Check if the ShowType exists in typeofshow table
@@ -54,42 +51,30 @@ if (isset($_POST['event_name']) && isset($_FILES['cover_image']) && isset($_FILE
         $ShowType = $showTypeRow['TypeID']; // Update the value of ShowType with the existing TypeID
     }
 
-    if (count($errors) == 0) {
-        // Check if the Location exists in the location table
-        $checkLocationQuery = "SELECT LocationID FROM location WHERE LocationName = '$Location'";
-        $checkLocationResult = mysqli_query($con, $checkLocationQuery);
+    // Check if the Location exists in the location table
+    $checkLocationQuery = "SELECT LocationID FROM location WHERE LocationName = '$Location'";
+    $checkLocationResult = mysqli_query($con, $checkLocationQuery);
 
-        if (!$checkLocationResult || mysqli_num_rows($checkLocationResult) === 0) {
-            // If the location does not exist, insert it into the location table
-            $insertLocationQuery = "INSERT INTO location (LocationName) VALUES ('$Location')";
-            $insertLocationResult = mysqli_query($con, $insertLocationQuery);
-
-            if ($insertLocationResult) {
-                $LocationID = mysqli_insert_id($con); // Get the inserted location ID
-            } else {
-                $errors[] = "Error inserting location";
-            }
-        } else {
-            // If the location exists, retrieve its LocationID
-            $locationRow = mysqli_fetch_assoc($checkLocationResult);
-            $LocationID = $locationRow['LocationID'];
-        }
-
+    if (!$checkLocationResult || mysqli_num_rows($checkLocationResult) === 0) {
+        $errors[] = "Invalid location";
+    } else {
+        $locationRow = mysqli_fetch_assoc($checkLocationResult);
+        $LocationID = $locationRow['LocationID'];
+    
         $cover_image = $_FILES['cover_image'];
         $zone_image = $_FILES['zone_image'];
         $cover_image_name = $cover_image['name'];
         $zone_image_name = $zone_image['name'];
         $cover_image_temp_name = $cover_image['tmp_name'];
         $zone_image_temp_name = $zone_image['tmp_name'];
-        $cover_image_folder = "uploads/" . $cover_image_name;
-        $zone_image_folder = "uploads/" . $zone_image_name;
+        $cover_image_folder = "uploads/".$cover_image_name;
+        $zone_image_folder = "uploads/".$zone_image_name;
 
         if (move_uploaded_file($cover_image_temp_name, $cover_image_folder) && move_uploaded_file($zone_image_temp_name, $zone_image_folder)) {
             $sql = "INSERT INTO showinfo (ShowName, TypeID, SaleDate, LocationID, Poster, SeatingMap, LimitTicket, Description)
-                     VALUES ('$ShowName', '$ShowType', '$SaleDate', '$LocationID', '$cover_image_folder', '$zone_image_folder', '$LimitOfTickets', '$EventDetail')";
-            $result = mysqli_query($con, $sql);
+            VALUES ('$ShowName', '$ShowType', '$SaleDate', '$LocationID', '$cover_image_name', '$zone_image_name', '$LimitOfTickets', '$EventDetail')";
 
-            if ($result) {
+            if (mysqli_query($con, $sql)) {
                 $showId = mysqli_insert_id($con); // Get the inserted show ID
 
                 if (count($showDates) > 0) {
@@ -148,4 +133,5 @@ if (count($errors) > 0) {
     echo "<script>window.location='staff_create_new_event.php';</script>";
     exit();
 }
+
 ?>

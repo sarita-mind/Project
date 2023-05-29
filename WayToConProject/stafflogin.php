@@ -10,7 +10,7 @@ include('server.php');
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WayToCon</title>
-  <link rel="icon" type="image/x-icon" href="image/Logo.png" />
+  <link rel="icon" type="image/x-icon" href="image/template.png" />
   <link rel="stylesheet" href="stafflogin.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -41,7 +41,7 @@ include('server.php');
     </div>
 
     <div class="user-box">
-      <input type="password" name="password" required= />
+      <input type="password" name="password" required />
       <label>Password</label>
     </div>
 

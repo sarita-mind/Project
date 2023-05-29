@@ -12,10 +12,10 @@
         $_SESSION['message'] = 'You must log in first';
         header('location:userlogin.php');
     }
-    if(!isset($_SESSION['record']))
-    {
-        header('location:giftshop.php');
-    }
+    // if(!isset($_SESSION['record']))
+    // {
+    //     header('location:giftshop.php');
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
