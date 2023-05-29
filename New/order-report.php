@@ -1,14 +1,32 @@
 <?php
-  
+    session_start();
     include('server.php');
+    
+    if(isset($_GET['logout'])){
+        session_destroy();
+        unset($_SESSION['UserEmail']);
+        header('location:userlogin.php');
+    }
 
-    if(!isset($_GET['id'])){
-        header('location:staffallorder.php');
+    if(!isset($_SESSION['UserEmail'])){
+        $_SESSION['message'] = 'You must log in first';
+        header('location:userlogin.php');
+    }
+
+    if((!isset($_SESSION['OrderID'])) & (!isset($_GET['id']))){
+        $_SESSION['message'] = 'You must order first';
+        header('location:giftshop.php');
+    }
+    if(!isset($_GET['id']))
+    {
+        $sql = "SELECT * FROM giftshoporder g JOIN user u ON g.UserID = u.UserID WHERE OrderID = '".$_SESSION['OrderID']."'";
+    }
+    if(!isset($_SESSION['OrderID']))
+    {
+        $sql = "SELECT * FROM giftshoporder g JOIN user u ON g.UserID = u.UserID WHERE OrderID = '".$_GET['id']."' ";
     }
 
     
-    $sql = "SELECT * FROM (giftshoporder g JOIN user u ON g.UserID = u.UserID) JOIN paymentmethod p ON g.PaymentMethodID = p.PaymentMethodID
-    WHERE OrderID = '".$_GET['id']."'";
     $result =  mysqli_query($con,$sql);
     $row = mysqli_fetch_array($result);
     
@@ -19,23 +37,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Shop Order | WayToCon Staff</title>
-    <link rel="icon" type="image/x-icon" href="image/template.png" />
-    <link rel = "stylesheet" href = "stafforder.css">
+    <title>Gift Shop Order - WayToCon</title>
+    <link rel="icon" type="image/x-icon" href="image/template.png"/>
+    <link rel = "stylesheet" href = "giftshop.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com/" >
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="js/datatables-simple-demo.js"></script>
 </head>
 <body>
-    <?php include_once('staffheader.php'); ?>
+    <?php include_once('header.php'); ?>
     <div class="container">
     <div class="alert alert-info h4 text-center mb-4 mt-5" role="alert">
-         Order Detail Report
+         Your Order 
     </div>
     <div class="row">
                 
@@ -44,21 +59,7 @@
         <b>OrderID&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['OrderID']?> <br>
         <p class="mt-2"><b>Order Datetime&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['OrderDateTime']?> <br>
         <b>User Name&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['UserFirstName']. ' ' .$row['UserLastName']?> <br>
-        <b>User Email&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['UserEmail']?> <br>
-        <b>Payment Method&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['PaymentMethodName']?> <br>
-        <b>Shipping Detail&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['Address']?></p>
-        <?php
-        if((!empty($row['PurchaseDateTime'])) && (!empty($row['PaymentAmount']))): ?>
-            <b style="color: blue;">Purchase DateTime&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['PurchaseDateTime']?><br>
-            <b style="color: blue;">Payment Amount&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=number_format($row['PaymentAmount'],2)?> THB</p>
-        <?php endif ?>
-        
-        <?php
-        if(!empty($row['TrackingNumber'])): ?>
-            <b style="color: blue;">Tracking Number&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['TrackingNumber']?></p>
-        <?php endif ?>
-        
-        
+        <b>Shipping Detail&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['Address']?></p><br>
     </div>
     
 
@@ -121,12 +122,12 @@
                 </div>
             </div>
 
+            <div>
+                <h6 class="text-end mt-1">** Please make the payment within 48 hours. **</h6>
+            </div>
+
             <div class="cartheader mt-3 mr-4">
-                    <a class ="btn btn-outline-secondary text-center" href="staffallorder.php">Back</a>  
-                    <?php
-                    if(empty($row['TrackingNumber']) && ($row['Status'] != 0)): ?>
-                        <a class ="btn btn-outline-success" href="edittracking.php?id=<?=$row['OrderID']?>">Add Tracking Number</a>  
-                    <?php endif ?>  
+                    <a class ="back text-center " onclick="window.history.back();">Back</a>      
             </div><br><br><br>
             
         

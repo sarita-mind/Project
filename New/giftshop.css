@@ -1,0 +1,178 @@
+.alertred {
+  width: 92%;
+  margin: 0 0 2rem 0;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color:#a94442;
+  background: #f2dede;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.detailprod {
+    background-color: #74BAB9;
+    color: white;
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.detailprod:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+hr.line1 {
+    border: 2.5px solid #9565AE;
+}
+
+
+.back {
+    background-color: #BA7474;
+    color: white;
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+
+.back:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.addmore {
+    background-color: #ada9a9;
+    color: white;
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+
+.addmore:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.cartdetail {
+    margin-left: 20px
+}
+
+.xbutton {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .xbutton:hover {
+    background-color: #BA7474;
+  }
+  
+  .xbutton:before,
+  .xbutton:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 2px;
+    background-color: white;
+  }
+  
+  .xbutton:before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .xbutton:after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  
+  .sep {
+    display: inline-block;
+    margin-right: 10px; 
+    margin-left: 10px; 
+  }
+  
+.plusbutton {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background-color: #fff;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+  color: rgb(164, 162, 162);
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.plusbutton:hover, .minusbutton:hover {
+  background-color: #ccc;
+  color: white;
+}
+
+.cart {
+  display: inline-block;
+  width: 25px
+}
+
+.cartheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderconfi {
+  border: 1px solid #000000;
+  border-radius: 10px;
+  border-spacing: 0;
+  border-collapse: separate;
+  
+}
+
+.orderconfi td {
+  padding: 15px; 
+}
+
+
+  .orderconfi tbody tr:not(:last-child) td {
+    border-bottom: 1px solid #000000;
+  }
+
+
+
+
+

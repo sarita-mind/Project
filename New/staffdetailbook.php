@@ -59,6 +59,11 @@
         <br>
         <b>Show Name&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['ShowName']?></p>
         <b>Show Time&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['ShowDatetime']?></p>
+        <?php
+        if((!empty($row['PurchaseDateTime'])) && (!empty($row['PaymentAmount']))): ?>
+            <b style="color: blue;">Purchase DateTime&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['PurchaseDateTime']?><br>
+            <b style="color: blue;">Payment Amount&nbsp;&nbsp;:&nbsp;&nbsp;</b><?=$row['PaymentAmount']?></p>
+        <?php endif ?>
         
     </div>
     
