@@ -1,0 +1,262 @@
+html, body {         
+    height: 145%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(#ffffff, #9565AE);
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .create-acc {
+    width: 600px;
+    padding: 40px;
+    background: rgb(255, 255, 255);
+    box-sizing: border-box;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.321);
+    border-radius: 50px;
+  }
+  
+  .create-acc-container {
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .create-acc-content {
+    max-height: 100%;
+    overflow-y: visible;
+  }
+  
+  .create-acc h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #000000;
+    text-align: center;
+  }
+  
+  .create-acc .form-group {
+    margin-bottom: 30px;
+  }
+  
+  .create-acc .form-group:last-child {
+    margin-bottom: 0;
+  }
+  
+  .create-acc button {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #9565AE;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .create-acc button:hover {
+    background-color: #6e4982;
+  }
+  
+  .create-acc p {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* กล่องม่วงๆสวยๆ */
+  .create-acc a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #9565AE;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .create-acc a:hover {
+    background: #9565AE;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #9565AE,
+                0 0 25px #9565AE,
+                0 0 50px #9565AE,
+                0 0 100px #9565AE;
+  }
+  
+  .create-acc a span {
+    position: absolute;
+    display: block;
+  }
+  
+  /* เปลี่ยนที่ใส่ชื่อให้เป็นทรงกลม */
+  .input-group {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 1em 0;
+    max-width: 190px;
+    position: relative;
+  }
+  
+  .input-group input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+  }
+  
+  .input-group label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+  }
+  
+  .input-group input:focus ~ label,
+  .input-group input:valid ~ label {
+    transform: translateY(-50%) scale(0.9);
+    margin: 0;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: #e8e8e8;
+  }
+  
+  .input-group input:focus {
+    border-color: rgb(150, 150, 200);
+  }
+  
+  /* เปลี่ยนตรง date ให้กลม */
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  
+  .control-label {
+    flex: 0 0 25%;
+    font-weight: bold;
+  }
+  
+  .col-md-4 {
+    flex: 0 0 40%;
+  }
+  
+  .form-control {
+    padding: 0.8em;
+    border-radius: 20px;
+    border: 2px solid rgb(200, 200, 200);
+    outline: none;
+    background-color: transparent;
+  }
+  
+  [type="date"]::-webkit-inner-spin-button,
+  [type="date"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  [type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 1.3em;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path fill="#aaa" d="M12.467 1.284A6 6 0 1 0 13 7h-1.065A5 5 0 1 1 12 3.065V2h.935a.5.5 0 0 1 .532.78l-1.5 2.598a.5.5 0 0 1-.876-.44L12.467 1.284zM1 6a5 5 0 1 1 10 0h-1a4 4 0 1 0-8 0H1zm2 0h1v1H3V6zm0 2h1v1H3V8zm2-2h1v1H5V6zm0 2h1v1H5V8zm2-2h1v1H7V6zm0 2h1v1H7V8zm2-2h1v1h-1V6zm0 2h1v1h-1V8zm2-2h1v1h-1V6zm0 2h1v1h-1V8z"/></svg>') no-repeat;
+    background-position: right center;
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+  }
+  
+  
+  /* gender */
+  .container form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  
+  .container label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+  }
+  
+  .container  label input {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  .container label input:checked + span {
+    background-color: #9565AE;
+    color: white;
+  }
+  
+  .container label input:checked + span:before {
+    box-shadow: inset 0 0 0 0.4375em #6F4187;
+  }
+  
+  .container label span {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
+    color: #9565AE;
+  }
+  
+  .container label span:hover {
+    background-color: #d6d6e5;
+  }
+  
+  .container label span:before {
+    display: flex;
+    flex-shrink: 0;
+    content: "";
+    background-color: #fff;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    margin-right: 0.375em;
+    transition: 0.25s ease;
+    box-shadow: inset 0 0 0 0.125em #6F4187;
+  }
+
+  .error h3{
+    width: 92%;
+    margin: 0 0 2rem 0;
+    padding: 10px;
+    border: 1px solid #a94442;
+    color:#a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+  }
+
+
+  .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
