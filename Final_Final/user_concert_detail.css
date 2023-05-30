@@ -1,0 +1,67 @@
+html,
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.card{
+    border-radius: 8px;
+}
+
+.card img{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 25px;
+}
+
+.card-body {
+    border: solid 2px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.detail-body {
+    border: solid 2px;
+    margin: auto;
+    height: 435px;
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.info-card {
+    border: solid 2px;
+    margin: auto;
+    padding: 0 0 0 50px;
+    border-radius: 25px;
+}
+
+.price ul {
+    display: inline;
+    padding-left: 0px;
+}
+
+.card-button {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    width: 50%;
+    background-color: #74BAB9;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 15px;
+    margin: auto;
+}
+
+.card-button:hover {
+    text-decoration: none;
+    background-color: #74BAB9;
+    color: #fff;
+}
+
+.venue {
+    align-items: center;
+}
+
+.venue .card-text {
+    margin-top: 0;
+}
