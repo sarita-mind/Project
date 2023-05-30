@@ -1,0 +1,85 @@
+.add_staff {
+    background-color: #F06647;
+    color: white;
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.add_staff:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.edit_staff {
+    background-color:  #f7b72c;
+    color: white;
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.edit_staff:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.delete_staff {
+    background-color: #e0462f;
+    color: white;
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.delete_staff:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.cancel_staff{
+    background-color: #e0e0e0;
+    color: rgb(0, 0, 0);
+    width: 20;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 50px; 
+    box-sizing: border-box;
+    font-size: 16px; 
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.cancel_staff:hover{
+    text-decoration: none;
+    background-color: #cbcbcb;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.form-check-inline {
+    margin-left: 10px;
+}

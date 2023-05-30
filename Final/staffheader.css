@@ -1,0 +1,137 @@
+
+html,
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+.header {
+    background:  #F06647;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    border-bottom-left-radius: 33px;
+    border-bottom-right-radius: 33px;
+    height: 150px;
+    left: 0px;
+    margin-top: -10px;
+}
+.header-con {
+    display: flex;
+    justify-content: space-between;
+    height: 150px;
+    left: 46px;
+    position: absolute;
+    align-items: center;
+    margin-top: 12px;
+}
+.logo-container a {
+    height: 196px;
+    left : 100px;
+    overflow: hidden;
+}
+
+.logo-container img {
+    width: 80%;
+}
+.line-container  {
+    padding-left: 3rem;
+}
+.line-container  img{
+    width: 80%;
+}
+
+.stafflogo-container  {
+    padding-left: 2rem;
+}
+.menu {
+    display: flex;
+    list-style-type: none;
+}
+.menu li {
+    padding-left: 2rem;
+}
+.menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+
+/* เอาไว้ปรับปุ่ม login */
+/* .login-btn{
+    position: flex;
+    top: 50px;
+    right:100%;
+}
+
+
+.login-btn a {
+    background: #9565AE;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: inline-block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+
+.login-btn:hover {
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+} */
+
+
+
+.login-btn {
+    margin-left: 120px;
+}
+
+.login-btn a {
+    background: #F68B63;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: inline-block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    color: #fff;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #695972;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+.dropdown-content a:hover {background-color: #685a6e;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    background: #F09C89;
+    color: #fff;
+}
