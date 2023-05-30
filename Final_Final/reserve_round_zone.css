@@ -1,0 +1,87 @@
+html,
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.card{
+    border-radius: 8px;
+}
+
+.card img{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 25px;
+}
+.inner-wrapper{
+    margin-left: 5rem;
+}
+.inner-wrapper img {
+    border-radius: 20px;
+}
+
+h3{
+    color : #6F4187
+}
+.card-body {
+    border: solid 1px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.box {
+    border: solid 1px;
+    border-radius: 15px;
+    width: 60%;
+    padding: 30px;
+}
+
+select {
+    border: solid 1px;
+    border-radius: 15px;
+    width: 100%;
+    padding: 12px 10px;
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    width: 30%;
+    background-color: #9565AE;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 15px;
+    margin: 0;;
+}
+
+.back-button:hover {
+    text-decoration: none;
+    background-color: #9565AE;
+    color: #fff;
+}
+
+.next-button {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    width: 30%;
+    background-color: #9565AE;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 15px;
+    margin-left: 480px;
+}
+
+.next-button:hover {
+    text-decoration: none;
+    background-color: #9565AE;
+    color: #fff;
+}
+
+.show_time {
+    border: solid 1px;
+    border-radius: 15px;
+}
+
